@@ -25,7 +25,7 @@ a.printName.call(b); // Shyam
 
 // normally when a function is called "this" is bound to the caller
 // for eg: in  a.printName() a is the caller
-// if there is o explicit caller
+// if there is no explicit caller
 // ie function is written in global context
 // global this is assigned as a caller
 // printName() ===> this.printName()4
@@ -83,3 +83,19 @@ let new_printv4 = print2.bind(c, 1, 2);
 new_printv4();
 
 new_printv4(3, 4);
+
+// bind can not be overridden
+console.log("bind can not be overridden");
+print2(1, 2, 3, 4);
+print2.call(a, 1, 2, 3, 4);
+print2.call(b, 1, 2, 3, 4);
+print2.call(c, 1, 2, 3, 4);
+print2.bind(c).call(a);
+// print2.bind(c) returns a new function which is bound to c
+// then we tried to to use call on new function
+print2.bind(c).apply(a);
+// print2.bind(c) returns a new function which is bound to c
+// then we tried to to use apply on new function
+print2.bind(c, 1, 2).call(a, 3, 4);
+print2.bind(c, 1, 2, 3, 4).apply(a, [5, 6, 7, 8]);
+print2.bind(c, 10, 2, 3, 4).bind(a, 0, 8, 9, 7)(5, 6, 7, 8);
